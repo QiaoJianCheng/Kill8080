@@ -1,8 +1,8 @@
 <idea-plugin>
     <id>cn.focus.kill8080</id>
     <name>kill8080</name>
-    <version>1.0</version>
-    <vendor email="jianchengqiao@sohu-inc.com" url="https://github.com/QiaoJianCheng/Kill8080">Kill8080</vendor>
+    <version>1.1</version>
+    <vendor url="https://github.com/QiaoJianCheng/Kill8080">Qiao</vendor>
 
     <description><![CDATA[
       Kill the process running on 8080 port by one key. By default, press `Ctrl+Meta+K` to perform a kill action, press `Ctrl+Shift+Meta+K` to show settings dialog.<br>

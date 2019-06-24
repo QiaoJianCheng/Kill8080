@@ -13,10 +13,13 @@ import java.awt.*;
 public class SettingsDialog extends DialogWrapper {
 
     private final Config config;
+    private final Project project;
     private JTextField textField;
+    private JCheckBox checkBox;
 
     SettingsDialog(@Nullable Project project) {
         super(project);
+        this.project = project;
         setTitle("Kill8080 Settings");
         config = new Config();
 
@@ -35,21 +38,25 @@ public class SettingsDialog extends DialogWrapper {
         horizontalBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JLabel label = new JLabel("Port you want to listen: ");
-
         textField = new JTextField(config.getPort());
-
         horizontalBox.add(label);
         horizontalBox.add(textField);
 
         box.add(horizontalBox);
+
+        checkBox = new JCheckBox("Show running process on status bar", config.showStatus());
+        box.add(checkBox);
+
         return box;
     }
 
     @Override
     protected void doOKAction() {
         if (isOK()) {
-            super.doOKAction();
             config.setPort(textField.getText());
+            config.showStatus(checkBox.isSelected());
+            project.getComponent(KillApplication.class).updateConfig();
+            super.doOKAction();
         } else {
             setErrorText("Are you serious?");
         }

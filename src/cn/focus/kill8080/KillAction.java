@@ -36,7 +36,7 @@ public class KillAction extends AnAction {
                 error = new BufferedReader(new InputStreamReader(process1.getErrorStream()));
                 err = error.readLine();
                 if (err == null || err.length() == 0) {
-                    notify(anActionEvent, "Process killed: port=" + port + " pid=" + pid);
+                    notify(anActionEvent, "Process killed: port=" + port + ", pid=" + pid + ".");
                 } else {
                     notify(anActionEvent, err);
                 }
