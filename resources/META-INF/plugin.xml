@@ -5,13 +5,16 @@
     <vendor url="https://github.com/QiaoJianCheng/Kill8080">Qiao</vendor>
 
     <description><![CDATA[
-      Kill the process running on 8080 port by one key. By default, press `Ctrl+Meta+K` to perform a kill action, press `Ctrl+Shift+Meta+K` to show settings dialog.<br>
+      Kill the process running on 8080 port by one key. <br>
+      By default, press `Ctrl+Meta+K` to perform a kill action, press `Ctrl+Shift+Meta+K` to show settings dialog.<br>
+      <br>
       Source code is <a href="https://github.com/QiaoJianCheng/Kill8080">here</a>.
       ]]>
     </description>
 
     <change-notes><![CDATA[
       1.0: First version.You can kill the process running on 8080 port by one key.<br>
+      1.1: Show running process on status bar, it depends on you.<br>
       ]]>
     </change-notes>
 
