@@ -15,7 +15,7 @@
       1.0: First version.<br>
       ]]>
     </change-notes>
-
+    <idea-version since-build="141.0"/>
     <application-components>
         <component>
             <implementation-class>cn.focus.kill8080.KillApplication</implementation-class>
