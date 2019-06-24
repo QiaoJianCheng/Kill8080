@@ -48,7 +48,7 @@ public class KillAction extends AnAction {
 
     private void notify(@NotNull AnActionEvent anActionEvent, String msg) {
         Notifications.Bus.notify(new Notification("kill8080",
-                        "kill8080",
+                        "Kill8080",
                         msg,
                         NotificationType.INFORMATION),
                 getEventProject(anActionEvent));

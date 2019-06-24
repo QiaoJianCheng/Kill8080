@@ -98,8 +98,8 @@ public class KillStatus implements StatusBarWidget, StatusBarWidget.TextPresenta
 
 
     private void notify(Project project, String msg) {
-        Notifications.Bus.notify(new Notification("kill8080",
-                "kill8080",
+        Notifications.Bus.notify(new Notification("Kill8080",
+                "Kill8080",
                 msg,
                 NotificationType.INFORMATION), project
         );
