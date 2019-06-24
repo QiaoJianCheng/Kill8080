@@ -63,6 +63,12 @@ public class KillStatus implements StatusBarWidget, StatusBarWidget.TextPresenta
         return null;
     }
 
+    @NotNull
+    @Override
+    public String getMaxPossibleText() {
+        return "";
+    }
+
     @Nullable
     @Override
     public Consumer<MouseEvent> getClickConsumer() {
