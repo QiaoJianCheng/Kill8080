@@ -5,17 +5,20 @@
     <vendor email="jianchengqiao@sohu-inc.com" url="https://github.com/QiaoJianCheng/Kill8080">Kill8080</vendor>
 
     <description><![CDATA[
-      Kill the process running on 8080 port by one key.<br>
+      Kill the process running on 8080 port by one key. By default, press `Ctrl+Meta+K` to perform a kill action, press `Ctrl+Shift+Meta+K` to show settings dialog.<br>
       Source code is <a href="https://github.com/QiaoJianCheng/Kill8080">here</a>.
       ]]>
     </description>
 
     <change-notes><![CDATA[
-      1.0: First version.<br>
-      1.0: First version.<br>
+      1.0: First version.You can kill the process running on 8080 port by one key.<br>
       ]]>
     </change-notes>
-    <idea-version since-build="141.0"/>
+
+    <idea-version since-build="171"/>
+
+    <depends>com.intellij.modules.lang</depends>
+
     <application-components>
         <component>
             <implementation-class>cn.focus.kill8080.KillApplication</implementation-class>
@@ -38,4 +41,7 @@
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt K"/>
         </action>
     </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
 </idea-plugin>
