@@ -1,0 +1,41 @@
+<idea-plugin>
+    <id>cn.focus.kill8080</id>
+    <name>kill8080</name>
+    <version>1.0</version>
+    <vendor email="jianchengqiao@sohu-inc.com" url="https://github.com/QiaoJianCheng/Kill8080">Kill8080</vendor>
+
+    <description><![CDATA[
+      Kill the process running on 8080 port by one key.<br>
+      Source code is <a href="https://github.com/QiaoJianCheng/Kill8080">here</a>.
+      ]]>
+    </description>
+
+    <change-notes><![CDATA[
+      1.0: First version.<br>
+      1.0: First version.<br>
+      ]]>
+    </change-notes>
+
+    <application-components>
+        <component>
+            <implementation-class>cn.focus.kill8080.KillApplication</implementation-class>
+        </component>
+    </application-components>
+
+    <actions>
+        <action id="cn.focus.kill8080.KillAction" class="cn.focus.kill8080.KillAction" text="kill8080"
+                description="Kill the process running on 8080 port">
+            <add-to-group anchor="after" group-id="ToolsMenu" relative-to-action="ToolsMenu"/>
+            <add-to-group anchor="after" group-id="ProjectViewPopupMenu"
+                          relative-to-action="ProjectViewPopupMenuRefactoringGroup"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta K"/>
+        </action>
+        <action id="cn.focus.kill8080.SettingsAction" class="cn.focus.kill8080.SettingsAction" text="Settings"
+                description="Settings of kill8080">
+            <add-to-group anchor="after" group-id="ToolsMenu" relative-to-action="ToolsMenu"/>
+            <add-to-group anchor="after" group-id="ProjectViewPopupMenu"
+                          relative-to-action="ProjectViewPopupMenuRefactoringGroup"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt K"/>
+        </action>
+    </actions>
+</idea-plugin>
