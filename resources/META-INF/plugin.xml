@@ -19,6 +19,8 @@
 
     <idea-version since-build="172"/>
 
+    <depends>com.intellij.modules.platform</depends>
+
     <application-components>
         <component>
             <implementation-class>cn.focus.sohu.kill8080.KillApplication</implementation-class>
