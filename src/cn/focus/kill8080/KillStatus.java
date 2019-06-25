@@ -4,26 +4,39 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.wm.CustomStatusBarWidget;
 import com.intellij.openapi.wm.IdeFrame;
 import com.intellij.openapi.wm.StatusBar;
-import com.intellij.openapi.wm.StatusBarWidget;
-import com.intellij.util.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
  * Created by QiaoJianCheng on 2019-06-24.
  */
-public class KillStatus implements StatusBarWidget, StatusBarWidget.TextPresentation {
+public class KillStatus implements CustomStatusBarWidget {
     private final IdeFrame ideFrame;
     private final Config config;
+    private final JLabel label;
     private String text;
 
     public KillStatus(IdeFrame ideFrame) {
         this.ideFrame = ideFrame;
         config = new Config();
+        label = new JLabel();
+        label.setFont(new Font(Font.DIALOG, Font.PLAIN, 11));
+        label.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                KillStatus.this.notify(ideFrame.getProject(), text == null ?
+                        ("Nothing runs on " + config.getPort() + " port.") :
+                        "Process running: port=" + config.getPort() + ", pid=" + text + ".");
+            }
+        });
     }
 
     @NotNull
@@ -35,7 +48,7 @@ public class KillStatus implements StatusBarWidget, StatusBarWidget.TextPresenta
     @Nullable
     @Override
     public WidgetPresentation getPresentation(@NotNull PlatformType platformType) {
-        return this;
+        return null;
     }
 
     @Override
@@ -44,38 +57,6 @@ public class KillStatus implements StatusBarWidget, StatusBarWidget.TextPresenta
 
     @Override
     public void dispose() {
-    }
-
-    @NotNull
-    @Override
-    public String getText() {
-        return "P:" + config.getPort() + "|" + (text == null ? "NULL" : text);
-    }
-
-    @Override
-    public float getAlignment() {
-        return 0;
-    }
-
-    @Nullable
-    @Override
-    public String getTooltipText() {
-        return null;
-    }
-
-    @SuppressWarnings("all")
-    @NotNull
-    @Override
-    public String getMaxPossibleText() {
-        return "";
-    }
-
-    @Nullable
-    @Override
-    public Consumer<MouseEvent> getClickConsumer() {
-        return mouseEvent -> notify(ideFrame.getProject(), text == null ?
-                ("Nothing runs on " + config.getPort() + " port.") :
-                "Process running: port=" + config.getPort() + ", pid=" + text + ".");
     }
 
     public IdeFrame getIdeFrame() {
@@ -94,6 +75,10 @@ public class KillStatus implements StatusBarWidget, StatusBarWidget.TextPresenta
 
     public void update(String text) {
         this.text = text;
+        label.setText("P:" + config.getPort() + "|" + (text == null ? "NULL" : text));
+        label.setToolTipText(text == null ?
+                ("Nothing runs on " + config.getPort() + " port.") :
+                "Process running: port=" + config.getPort() + ", pid=" + text + ".");
         ideFrame.getStatusBar().updateWidget(ID());
     }
 
@@ -104,5 +89,10 @@ public class KillStatus implements StatusBarWidget, StatusBarWidget.TextPresenta
                 msg,
                 NotificationType.INFORMATION), project
         );
+    }
+
+    @Override
+    public JComponent getComponent() {
+        return label;
     }
 }

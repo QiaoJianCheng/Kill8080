@@ -1,6 +1,6 @@
 package cn.focus.kill8080;
 
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.wm.IdeFrame;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.openapi.wm.WindowManagerListener;
@@ -18,7 +18,7 @@ import java.util.TimerTask;
 /**
  * Created by QiaoJianCheng on 2019-06-21.
  */
-public class KillApplication implements ApplicationComponent {
+public class KillApplication implements BaseComponent {
 
     public static final int PERIOD = 1000;
     private Timer timer;
@@ -70,6 +70,7 @@ public class KillApplication implements ApplicationComponent {
                             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
                             String pid = in.readLine();
                             updateStatusBar(pid);
+                            System.out.println("...");
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
