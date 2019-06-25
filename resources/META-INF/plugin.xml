@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>cn.focus.kill8080</id>
+    <id>cn.focus.sohu.kill8080</id>
     <name>Kill8080</name>
     <version>1.0</version>
     <vendor url="https://github.com/QiaoJianCheng/Kill8080">Qiao</vendor>
@@ -23,19 +23,19 @@
 
     <application-components>
         <component>
-            <implementation-class>cn.focus.kill8080.KillApplication</implementation-class>
+            <implementation-class>cn.focus.sohu.kill8080.KillApplication</implementation-class>
         </component>
     </application-components>
 
     <actions>
-        <action id="cn.focus.kill8080.KillAction" class="cn.focus.kill8080.KillAction" text="Kill8080"
+        <action id="cn.focus.sohu.kill8080.KillAction" class="cn.focus.sohu.kill8080.KillAction" text="Kill8080"
                 description="Kill the process running on 8080 port">
             <add-to-group anchor="after" group-id="ToolsMenu" relative-to-action="ToolsMenu"/>
             <add-to-group anchor="after" group-id="ProjectViewPopupMenu"
                           relative-to-action="ProjectViewPopupMenuRefactoringGroup"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta K"/>
         </action>
-        <action id="cn.focus.kill8080.SettingsAction" class="cn.focus.kill8080.SettingsAction" text="Settings"
+        <action id="cn.focus.sohu.kill8080.SettingsAction" class="cn.focus.sohu.kill8080.SettingsAction" text="Settings"
                 description="Settings of kill8080">
             <add-to-group anchor="after" group-id="ToolsMenu" relative-to-action="ToolsMenu"/>
             <add-to-group anchor="after" group-id="ProjectViewPopupMenu"

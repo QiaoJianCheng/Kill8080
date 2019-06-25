@@ -1,4 +1,4 @@
-package cn.focus.kill8080;
+package cn.focus.sohu.kill8080;
 
 import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.wm.IdeFrame;

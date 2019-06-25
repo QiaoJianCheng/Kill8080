@@ -1,4 +1,4 @@
-package cn.focus.kill8080;
+package cn.focus.sohu.kill8080;
 
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
