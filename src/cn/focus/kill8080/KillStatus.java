@@ -63,6 +63,7 @@ public class KillStatus implements StatusBarWidget, StatusBarWidget.TextPresenta
         return null;
     }
 
+    @SuppressWarnings("all")
     @NotNull
     @Override
     public String getMaxPossibleText() {
