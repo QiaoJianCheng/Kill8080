@@ -66,13 +66,16 @@ public class KillApplication implements BaseComponent {
                     @Override
                     public void run() {
                         try {
-                            Process process = Runtime.getRuntime().exec("lsof -i tcp:" + config.getPort() + " -t -c java");
+                            Process process = Runtime.getRuntime().exec("lsof -i tcp:" + config.getPort());
                             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
                             ArrayList<String> pids = new ArrayList<>();
                             String line;
                             while ((line = in.readLine()) != null) {
-                                pids.add(line);
+                                if (line.startsWith("java")) {
+                                    pids.add(line.substring(line.indexOf("java") + 4, line.indexOf("sohu")).trim());
+                                }
                             }
+                            if (pids.size() == 0) pids.add("NULL");
                             updateStatusBar(pids.toString());
                         } catch (IOException e) {
                             e.printStackTrace();

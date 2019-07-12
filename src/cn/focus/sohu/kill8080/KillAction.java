@@ -21,13 +21,15 @@ public class KillAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         String port = new Config().getPort();
         try {
-            Process process = Runtime.getRuntime().exec("lsof -i tcp:" + port + " -t -c java");
+            Process process = Runtime.getRuntime().exec("lsof -i tcp:" + port);
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
             BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
             ArrayList<String> pids = new ArrayList<>();
             String line;
             while ((line = in.readLine()) != null) {
-                pids.add(line);
+                if (line.startsWith("java")) {
+                    pids.add(line.substring(line.indexOf("java") + 4, line.indexOf("sohu")).trim());
+                }
             }
             String err = error.readLine();
             if (pids.size() == 0) {
