@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
@@ -68,7 +69,7 @@ public class KillApplication implements BaseComponent {
                         try {
                             Process process = Runtime.getRuntime().exec("lsof -i tcp:" + config.getPort());
                             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                            ArrayList<String> pids = new ArrayList<>();
+                            HashSet<String> pids = new HashSet<>();
                             String line;
                             while ((line = in.readLine()) != null) {
                                 if (line.startsWith("java")) {

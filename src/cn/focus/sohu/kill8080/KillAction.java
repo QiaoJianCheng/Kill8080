@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by QiaoJianCheng on 2019-06-21.
@@ -24,7 +24,7 @@ public class KillAction extends AnAction {
             Process process = Runtime.getRuntime().exec("lsof -i tcp:" + port);
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
             BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            ArrayList<String> pids = new ArrayList<>();
+            HashSet<String> pids = new HashSet<>();
             String line;
             while ((line = in.readLine()) != null) {
                 if (line.startsWith("java")) {
