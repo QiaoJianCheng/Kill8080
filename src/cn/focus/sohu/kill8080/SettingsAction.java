@@ -1,8 +1,7 @@
 package cn.focus.sohu.kill8080;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.actionSystem.*;
+import org.jetbrains.annotations.*;
 
 /**
  * Created by QiaoJianCheng on 2019-06-21.

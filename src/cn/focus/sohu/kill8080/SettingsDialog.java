@@ -1,8 +1,9 @@
 package cn.focus.sohu.kill8080;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.DialogWrapper;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.components.*;
+import com.intellij.openapi.project.*;
+import com.intellij.openapi.ui.*;
+import org.jetbrains.annotations.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,11 +18,11 @@ public class SettingsDialog extends DialogWrapper {
     private JTextField textField;
     private JCheckBox checkBox;
 
-    SettingsDialog(@Nullable Project project) {
+    SettingsDialog(Project project) {
         super(project);
         this.project = project;
         setTitle("Kill8080 Settings");
-        config = new Config();
+        config = new Config(project);
 
         init();
     }
@@ -44,7 +45,7 @@ public class SettingsDialog extends DialogWrapper {
 
         box.add(horizontalBox);
 
-        checkBox = new JCheckBox("Show running process on status bar", config.showStatus());
+        checkBox = new JCheckBox("Show on status bar", config.showStatus());
         box.add(checkBox);
 
         return box;
@@ -55,7 +56,11 @@ public class SettingsDialog extends DialogWrapper {
         if (isOK()) {
             config.setPort(textField.getText());
             config.showStatus(checkBox.isSelected());
-            project.getComponent(KillApplication.class).updateConfig();
+            if (checkBox.isSelected()) {
+                ServiceManager.getService(project, KillService.class).show();
+            } else {
+                ServiceManager.getService(project, KillService.class).hide();
+            }
             super.doOKAction();
         } else {
             setErrorText("Are you serious?");

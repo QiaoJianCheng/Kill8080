@@ -1,16 +1,10 @@
 package cn.focus.sohu.kill8080;
 
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.actionSystem.*;
+import org.jetbrains.annotations.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.HashSet;
+import java.io.*;
+import java.util.*;
 
 /**
  * Created by QiaoJianCheng on 2019-06-21.
@@ -19,24 +13,24 @@ public class KillAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
-        String port = new Config().getPort();
+        String port = new Config(anActionEvent.getProject()).getPort();
         try {
-            Process process = Runtime.getRuntime().exec("lsof -i tcp:" + port);
+            Process process = Runtime.getRuntime().exec("lsof -i tcp:" + port + " -a -c java -t");
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
             BufferedReader error = new BufferedReader(new InputStreamReader(process.getErrorStream()));
             HashSet<String> pids = new HashSet<>();
             String line;
             while ((line = in.readLine()) != null) {
-                if (line.startsWith("java")) {
-                    pids.add(line.substring(line.indexOf("java") + 4, line.indexOf("sohu")).trim());
+                if (line.matches("\\d*")) {
+                    pids.add(line);
                 }
             }
             String err = error.readLine();
             if (pids.size() == 0) {
                 if (err == null || err.length() == 0) {
-                    notify(anActionEvent, "Nothing runs on " + port + " port.");
+                    KillService.notify(anActionEvent.getProject(), "Nothing runs on " + port + " port.");
                 } else {
-                    notify(anActionEvent, err);
+                    KillService.notify(anActionEvent.getProject(), err);
                 }
             } else {
                 for (String pid : pids) {
@@ -44,22 +38,14 @@ public class KillAction extends AnAction {
                     error = new BufferedReader(new InputStreamReader(process1.getErrorStream()));
                     err = error.readLine();
                     if (err == null || err.length() == 0) {
-                        notify(anActionEvent, "Process killed: port=" + port + ", pid=" + pid + ".");
+                        KillService.notify(anActionEvent.getProject(), "Process killed: port=" + port + ", pid=" + pid + ".");
                     } else {
-                        notify(anActionEvent, err);
+                        KillService.notify(anActionEvent.getProject(), err);
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void notify(@NotNull AnActionEvent anActionEvent, String msg) {
-        Notifications.Bus.notify(new Notification("kill8080",
-                        "Kill8080",
-                        msg,
-                        NotificationType.INFORMATION),
-                getEventProject(anActionEvent));
     }
 }
