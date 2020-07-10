@@ -5,4 +5,6 @@ Kill8080
 
 * By default, press `Ctrl+Meta+K` to perform a kill action, press `Ctrl+Shift+Meta+K` to show settings dialog.  
 
-* Search `Kill8080` on plugin marketplace, or download `Kill8080.jar` from [here](https://github.com/QiaoJianCheng/Kill8080/raw/master/Kill8080.jar) to install from local file on disk. 
+* Search `Kill8080` on plugin marketplace, or download `Kill8080.jar` from [here](https://github.com/QiaoJianCheng/Kill8080/raw/master/Kill8080.jar) to install from local file on disk.
+
+![img](img.png)

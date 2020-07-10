@@ -1,17 +1,20 @@
 package cn.focus.sohu.kill8080;
 
-import com.intellij.ide.util.PropertiesComponent;
+import com.intellij.ide.util.*;
+import com.intellij.openapi.project.*;
 
 /**
  * Created by QiaoJianCheng on 2019-06-21.
  */
 class Config {
-    private static final String KEY_PORT = "cn.focus.kill8080_KEY_PORT";
-    private static final String KEY_SHOW = "cn.focus.kill8080_KEY_SHOW";
+    private final String KEY_PORT;
+    private final String KEY_SHOW;
     private final PropertiesComponent propertiesComponent;
 
-    Config() {
+    Config(Project project) {
         propertiesComponent = PropertiesComponent.getInstance();
+        KEY_PORT = "cn.focus.kill8080_KEY_PORT" + project.getName();
+        KEY_SHOW = "cn.focus.kill8080_KEY_SHOW" + project.getName();
     }
 
     public String getPort() {
